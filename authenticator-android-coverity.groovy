@@ -4,7 +4,7 @@ pipeline {
   agent any
 
   environment {
-    GIT_BRANCH='master'
+    GIT_BRANCH='develop'
     JAVA_HOME='/Library/Java/JavaVirtualMachines/jdk1.8.0_301.jdk/Contents/Home'
 
     COV_AUTH_KEY_PATH = "${HOME}/coverity/auth-key.txt"
