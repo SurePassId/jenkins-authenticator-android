@@ -6,7 +6,7 @@ pipeline {
   environment {
     GIT_BRANCH='master'
     JAVA_HOME='/Library/Java/JavaVirtualMachines/jdk1.8.0_301.jdk/Contents/Home'
-    //  COVERITY_TOOL_HOME = '/Applications/cov-analysis-macosx-2021.06'
+    COVERITY_TOOL_HOME = '/Applications/cov-analysis-macosx-2021.06'
   }
 
   stages {
@@ -31,7 +31,7 @@ pipeline {
         withCoverityEnvironment(coverityInstanceUrl: 'https://cov.surepassid.com:8443/',
                                 createMissingProjectsAndStreams: true,
                                 projectName: 'android-authenticator',
-                                streamName: 'android-authenticator-surepassid-black',
+                                streamName: 'android-authenticator-surepassid-develop',
                                 viewName: 'High Impact Outstanding') {
           coverityIssueCheck returnIssueCount: true,
                              markUnstable: true
