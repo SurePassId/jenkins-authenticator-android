@@ -36,7 +36,7 @@ pipeline {
                                 projectName: "${COV_PROJECT}",
                                 streamName: "${COV_STREAM}",
                                 viewName: "${COV_VIEW}",
-                                authKey: "${HOME}/coverity/auth-key.txt") {
+                                authKeyPath: "${HOME}/coverity/auth-key.txt") {
           coverityIssueCheck returnIssueCount: true,
                              markUnstable: true
         }
