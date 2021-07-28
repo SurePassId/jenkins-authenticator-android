@@ -6,7 +6,7 @@ pipeline {
   environment {
     GIT_BRANCH='master'
     JAVA_HOME='/Library/Java/JavaVirtualMachines/jdk1.8.0_301.jdk/Contents/Home'
-    COVERITY_TOOL_HOME = '/Applications/cov-analysis-macosx-2021.06'
+    
     COV_URL = 'https://cov.surepassid.com:8443/'
     COV_PROJECT = 'android-authenticator'
     COV_STREAM = 'android-authenticator-surepassid-develop'
