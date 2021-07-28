@@ -6,9 +6,10 @@ pipeline {
   environment {
     GIT_BRANCH='master'
     JAVA_HOME='/Library/Java/JavaVirtualMachines/jdk1.8.0_301.jdk/Contents/Home'
-    
+
+    COV_AUTH_KEY_PATH = "${HOME}/coverity/auth-key.txt"
     COV_URL = 'https://cov.surepassid.com:8443/'
-    COV_PROJECT = 'android-authenticator'
+    COV_PROJECT = 'android-authenticator-surepassid'
     COV_STREAM = 'android-authenticator-surepassid-develop'
   }
 
@@ -31,7 +32,7 @@ pipeline {
     stage('Issue Check') {
       steps {
         withCoverityEnvironment(coverityInstanceUrl: "${COV_URL}",
-                                projectName: "${COV_URL}",
+                                projectName: "${COV_PROJECT}",
                                 streamName: "${COV_STREAM}",
                                 viewName: 'High Impact Outstanding') {
           coverityIssueCheck returnIssueCount: true,
