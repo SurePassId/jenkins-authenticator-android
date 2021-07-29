@@ -43,6 +43,7 @@ pipeline {
   agent any
 
   environment {
+    GIT_BRANCH='master'
     JAVA_HOME = """${sh(
         returnStdout: true,
         script: '/usr/libexec/java_home -v 1.8.0'
@@ -56,9 +57,9 @@ pipeline {
         // Jenkins cleans the workspace
         cleanWs()
         // authenticator-android.github.com:SurePassId/Authenticator-Android.git
-        git branch: "master",
-            credentialsId: 'surepassid-jenkins',
-            url: 'authenticator-android.github.com:SurePassId/Authenticator-Android.git'
+        git branch: "${GIT_BRANCH}",
+            credentialsId: 'surepassid-jenkins-key',
+            url: 'git@github.com:SurePassId/Authenticator-Android.git'
       }
     }
 
@@ -70,7 +71,6 @@ pipeline {
                 authenticator:bundleSurepassidBlackRelease \
                 authenticator:bundleSurepassidGreenPushRelease \
                 authenticator:bundleSurepassidGreenExpressRelease'''
-          echo "The build stage passed..."
         }
       }
     }

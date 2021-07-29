@@ -4,10 +4,16 @@ pipeline {
   agent any
 
   environment {
-    GIT_BRANCH='develop'
-    JAVA_HOME='/Library/Java/JavaVirtualMachines/jdk1.8.0_301.jdk/Contents/Home'
+    GIT_BRANCH='master'
+    JAVA_HOME = """${sh(
+        returnStdout: true,
+        script: '/usr/libexec/java_home -v 1.8.0'
+      )}""".trim()
 
-    // COV_AUTH_KEY_PATH = "${HOME}/coverity/auth-key.txt"
+
+      ////////////////////////
+    // Coverity Variables //
+    ////////////////////////
     COV_URL = 'https://cov.surepassid.com:8443/'
     COV_PROJECT = 'android-authenticator-surepassid'
     COV_STREAM = 'android-authenticator-surepassid-develop'
@@ -20,7 +26,8 @@ pipeline {
         // Jenkins cleans the workspace
         cleanWs()
         git branch: "${GIT_BRANCH}",
-            url: 'authenticator-android.github.com:SurePassId/Authenticator-Android.git'
+            credentialsId: 'surepassid-jenkins-key',
+            url: 'git@github.com:SurePassId/Authenticator-Android.git'
       }
     }
     stage('Analyze') {
